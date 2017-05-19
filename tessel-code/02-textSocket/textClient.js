@@ -7,9 +7,10 @@ let ws = require('nodejs-websocket');
 let port = 8000;
 
 // tessel's IP
-let tIP = "172.20.10.2" //"192.168.1.101"; 
-// `ws://${tIP}:${port}`
-let client = ws.connect('ws://172.20.10.2:8000', () => {
+let tIP = "172.20.10.2";
+// 'ws://172.20.10.2:8000'
+
+let client = ws.connect(`ws://${tIP}:${port}`, () => {
     // when client/us connects send message
     client.sendText('yay! client connected');
 });
