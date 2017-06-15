@@ -5,6 +5,8 @@ var tessel = require('tessel');
 tessel.led[2].on();
 
 // Blink!
+// this blinks the other two LED lights (next to the brand name on the tessel)
+// the LEDs are blue and green
 setInterval(function () {
   tessel.led[2].toggle();
   tessel.led[3].toggle();
