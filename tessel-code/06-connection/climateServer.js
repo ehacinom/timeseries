@@ -17,8 +17,7 @@ const d = 5,
       timeout = 300;
 
 // writeable stream stored outside the server callback
-let socketStream;
-let connection;
+let socketStream, connection;
 
 // stop looping forever after closing client connection
 let isOpen = true;
@@ -31,9 +30,10 @@ var server = ws.createServer((conn) => {
     // create writeable stream
     conn.on('text', str => {
         console.log(`server recieved message: ${str}`);
-        conn.send('recieved')
+        
         // writeable stream
         // socketStream = conn.beginBinary();
+
         isOpen = true;
         connection = conn;
     });

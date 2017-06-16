@@ -17,6 +17,9 @@ socket.onmessage = function (e) {
     //     temp: +temp,
     //     humid: +humid
     // })
+    
+    // d3
+    // tick()
 }
 
 // Connection opened
