@@ -8,18 +8,17 @@ const port = 8000,
 const socket = new WebSocket(tIP);
 
 socket.onmessage = function (e) {
-    console.log('Recieved Message from Server!', e)
-    // let d = $.parseJSON(evt.data);
-
+    console.log(e.data)
+    const [ temp, humid ] = e.data.split(', ')
     // add to data
-    // data.push({
-    //     time: ++t,
-    //     temp: +temp,
-    //     humid: +humid
-    // })
-    
+    data.push({
+        time: ++t,
+        temp: +temp,
+        humid: +humid
+    })
+
     // d3
-    // tick()
+    tick()
 }
 
 // Connection opened
@@ -29,22 +28,22 @@ socket.addEventListener('open', (event) => {
   console.log(event)
 });
 
-// Listen for messages
-socket.addEventListener('binary', (event) => {
-  console.log('Binary from server', event);
-});
-
-socket.addEventListener('message', (event) => {
-  console.log('Message from server', event);
-});
-
-socket.addEventListener('data', (event) => {
-  console.log('Data from server', event);
-});
-
-socket.addEventListener('text', (event) => {
-  console.log('Text from server', event);
-});
+// // Listen for messages
+// socket.addEventListener('binary', (event) => {
+//   console.log('Binary from server', event);
+// });
+//
+// socket.addEventListener('message', (event) => {
+//   console.log('Message from server', event);
+// });
+//
+// socket.addEventListener('data', (event) => {
+//   console.log('Data from server', event);
+// });
+//
+// socket.addEventListener('text', (event) => {
+//   console.log('Text from server', event);
+// });
 
 
 // const client = ws.connect(tIP, () => {

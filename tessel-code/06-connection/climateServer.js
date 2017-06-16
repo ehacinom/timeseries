@@ -39,8 +39,9 @@ var server = ws.createServer((conn) => {
     });
     
     conn.on('close', (code, reason) => {
-        console.log('connection closed');
         isOpen = false;
+        connection = null;
+        console.log('connection closed');
     });
 }).listen(port);
 console.log('listening on port', port)
@@ -60,7 +61,13 @@ climate.on('ready', () => {
 
                 // stream and emit to client
                 // if (socketStream && isOpen) socketStream.write(output)
-                if (connection && isOpen) connection.send(output)
+                if (connection && isOpen) {
+                    try {connection.send(output) }
+                    catch (err) { 
+                        console.log('Error closing:', err)
+                        connection.close()
+                    }
+                }
 
                 setTimeout(loop, timeout);
             });
