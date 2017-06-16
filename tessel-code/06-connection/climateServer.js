@@ -18,6 +18,7 @@ const d = 5,
 
 // writeable stream stored outside the server callback
 let socketStream;
+let connection;
 
 // stop looping forever after closing client connection
 let isOpen = true;
@@ -30,10 +31,11 @@ var server = ws.createServer((conn) => {
     // create writeable stream
     conn.on('text', str => {
         console.log(`server recieved message: ${str}`);
-
+        conn.send('recieved')
         // writeable stream
-        socketStream = conn.beginBinary();
+        // socketStream = conn.beginBinary();
         isOpen = true;
+        connection = conn;
     });
     
     conn.on('close', (code, reason) => {
@@ -51,14 +53,14 @@ climate.on('ready', () => {
     setImmediate(function loop () {
         climate.readTemperature('f', function (err, temp) {
             climate.readHumidity(function (err, humid) {
+                let output = temp.toFixed(d)+', '+humid.toFixed(d)
                 
                 // tessel cli log
-                console.log('Degrees:', temp.toFixed(d) + ' F',
-                            'Humidity:', humid.toFixed(d) + ' %RH');
+                console.log(output);
 
-                // stream to client
-                if (socketStream && isOpen)
-                    socketStream.write(temp.toFixed(d)+', '+temp.toFixed(d)+'\n')
+                // stream and emit to client
+                // if (socketStream && isOpen) socketStream.write(output)
+                if (connection && isOpen) connection.send(output)
 
                 setTimeout(loop, timeout);
             });

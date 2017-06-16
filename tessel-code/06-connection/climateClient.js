@@ -8,8 +8,15 @@ const port = 8000,
 const socket = new WebSocket(tIP);
 
 socket.onmessage = function (e) {
-    console.log(e)
-    var data = $.parseJSON(evt.data);
+    console.log('Recieved Message from Server!', e)
+    // let d = $.parseJSON(evt.data);
+
+    // add to data
+    // data.push({
+    //     time: ++t,
+    //     temp: +temp,
+    //     humid: +humid
+    // })
 }
 
 // Connection opened
@@ -24,6 +31,10 @@ socket.addEventListener('binary', (event) => {
   console.log('Binary from server', event);
 });
 
+socket.addEventListener('message', (event) => {
+  console.log('Message from server', event);
+});
+
 socket.addEventListener('data', (event) => {
   console.log('Data from server', event);
 });
@@ -31,7 +42,6 @@ socket.addEventListener('data', (event) => {
 socket.addEventListener('text', (event) => {
   console.log('Text from server', event);
 });
-
 
 
 // const client = ws.connect(tIP, () => {
