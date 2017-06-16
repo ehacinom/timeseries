@@ -9,14 +9,16 @@ const socket = new WebSocket(tIP);
 
 socket.onmessage = function (e) {
     console.log(e.data)
-    const [ temp, humid ] = e.data.split(', ')
+    const [ intemp, inhumid ] = e.data.split(', ')
     // add to data
     data.push({
         time: ++t,
-        temp: +temp,
-        humid: +humid
+        value: +intemp,
+        temp: +intemp,
+        humid: +inhumid
     })
 
+    console.log(data)
     // d3
     tick()
 }

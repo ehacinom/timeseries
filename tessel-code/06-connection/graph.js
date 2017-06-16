@@ -49,7 +49,7 @@ var xAxis = d3.svg.axis().scale(x).orient("bottom");
 var axis = svg.append("g")
   .attr("class", "x axis")
   .attr("transform", "translate(0," + height + ")")
-  .call(x.axis = xAxis); 
+  .call(x.axis = xAxis);
 
 var path = svg.append("g")
   .attr("clip-path", "url(#clip)")
@@ -58,6 +58,7 @@ var path = svg.append("g")
   .attr("class", "line");
 
 function tick() {
+    console.log('TICKING')
 
   // update the domains
   x.domain([t - n + 2, t]);
