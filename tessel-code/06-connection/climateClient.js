@@ -8,17 +8,21 @@ const port = 8000,
 const socket = new WebSocket(tIP);
 
 socket.onmessage = function (e) {
-    console.log(e.data)
+    // console.log(e.data);
     const [ intemp, inhumid ] = e.data.split(', ')
+    
+    const tValue = '.' + intemp.slice(4);
+    const hValue = '.' + inhumid.slice(4);
     // add to data
     data.push({
         time: ++t,
-        value: +intemp,
+        value: +tValue,
+        tValue: +tValue,
+        hValue: +hValue
         temp: +intemp,
         humid: +inhumid
     })
 
-    console.log(data)
     // d3
     tick()
 }

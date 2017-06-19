@@ -1,6 +1,3 @@
-// var d3 = require("d3");
-
-
 var t = -1,
   n = 40,
   duration = 750,
@@ -21,7 +18,7 @@ var x = d3.scale.linear()
 
 var y = d3.time.scale()
   .range([height, 0])
-  .domain([0, 400]);;
+  .domain([0, 1]);
 
 var line = d3.svg.line()
   .interpolate("basis")
@@ -58,7 +55,7 @@ var path = svg.append("g")
   .attr("class", "line");
 
 function tick() {
-    console.log('TICKING')
+  console.log('TICKING')
 
   // update the domains
   x.domain([t - n + 2, t]);
